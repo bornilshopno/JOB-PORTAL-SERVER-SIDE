@@ -78,6 +78,15 @@ async function run() {
         .send({ success: true });
     })
 
+    app.post("/logout", (req,res)=>{
+      res
+      .clearCookie("token",{
+        httpOnly:true,
+      secure:false}
+      )
+      .send({success:true})
+    })
+
     app.post("/jobs", async (req, res) => {
       const newJob = req.body;
       const result = await jobCollection.insertOne(newJob);
